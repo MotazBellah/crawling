@@ -60,9 +60,10 @@ def scrap_website():
 
     # Get the part and part_category for each category
     # Get manufacturer, category and model by convert the link to list and get the data from it
-    part = (k.split('/')[3:] + p.split(' - ') for k in cat for p in next(get_text(k)) if ' - ' in p)
+    part = (k.split('/')[3:] + p.strip().split(' - ') for k in cat for p in next(get_text(k)) if ' - ' in p)
+    # print(next(part))
 
-    with open('catalogue.csv', 'w') as file:
+    with open('catalogue10.csv', 'w') as file:
         writer = csv.writer(file)
         header = ["manufacturer", "category", "model", "part", "part_category"]
         writer.writerow(header)
